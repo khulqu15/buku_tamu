@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
@@ -129,6 +130,7 @@ class DashboardController extends Controller
             if($request->hasFile('foto')) {
                 $foto = $request->file('foto');
                 $fotoName = time().'-'.Str::random(20).'.'.$foto->getClientOriginalExtension();
+                File::delete('img/pegawai/'.$pegawai->foto);
                 $foto->move('img/pegawai/', $fotoName);
                 $image = Image::make(sprintf('img/pegawai/%s', $fotoName))->resize(200, 200)->save();
                 $pegawai->foto = $fotoName;

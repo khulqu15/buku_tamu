@@ -10,24 +10,38 @@
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
         #myVideo {
-            position: fixed;
+            position: relative;
             right: 0;
+            left: 0;
+            top: -5px;
             bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
+            width: 100%;
+            height: 100%;
         }
     </style>
 
 </head>
 <body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="container-fluid m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-md-12 m-0 p-0">
                 <video muted loop autoplay id="myVideo">
                     <source src="{{ URL::asset('video/1579797922-Ninno.mp4') }}" type="video/mp4">
                 </video>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 my-4">
+                    <h1>Selamat datang</h1>
+                    <p>Sistem Informasi Buku Tamu dan Peminjaman</p>
+                </div>
             </div>
         </div>
     </div>

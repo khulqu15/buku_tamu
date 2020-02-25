@@ -20,85 +20,87 @@
         </div>
     @endif
 
+    @include('pages.nav.navbar')
+
     <div class="container pt-5 mt-4">
         <div class="row">
+            <form action="{{ url('/pinjam/barang/'.$inventaris->id.'/'.$inventaris->kode_barang) }}" method="post">
             <div class="col-md-12">
                 <h3>Peminjaman {{ $inventaris->name }}</h3>
                 <div class="row">
-                    <div class="col-md-4 pt-4">
-                        <div class="position-sticky" style="top: 100px">
-                            <img src="{{ URL::asset('img/inventaris/'.$inventaris->foto) }}" width="100%" alt="">
-                        </div>
-                    </div>
-
                     <div class="col-md-8">
-                        <div class="form-group">
-                         </div>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label for="name">Nama Inventaris</label>
-                                    <input type="text" disabled name="name" id="name" required class="form-control" value="{{ $inventaris->name }}">
-                               </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Jumlah</label>
-                                    <input type="number" name="" id="" required class="form-control" value="{{ $inventaris->jumlah }}" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tujuan">Deskripsi</label>
-                            <textarea name="tujuan" required id="tujuan" disabled class="form-control" rows="4">{{ $inventaris->description }}</textarea>
-                        </div>
-                        @if($inventaris->jumlah == "0")
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Kosong, Dipinjam semua</strong>
-                        </div>
-                        @else
-                        <div class="alert alert-info" role="alert">
-                            <strong>Ada, tersedia {{ $inventaris->jumlah }} barang</strong>
-                        </div>
-                        @endif
-                        <form action="{{ url('/pinjam/barang/'.$inventaris->id.'/'.$inventaris->kode_barang) }}" method="post">
                             {{ csrf_field() }}
-                            <div class="col-lg-10 mt-5 offset-md-2">
+                            <div class="col-lg-12 mt-5">
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="pengembalian">Pengembalian</label>
-                                            <input type="date" name="pengembalian" id="pengembalian" required class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="jumlah">Jumlah</label>
-                                            <input type="number" name="jumlah" id="jumlah" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="nama_peminjam">Nama Peminjam</label>
                                             <input type="text" name="nama_peminjam" id="nama_peminjam" required class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="phone_peminjam">Nomor HP</label>
                                             <input type="text" name="phone_peminjam" id="phone_peminjam" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
                                         </div>
                                     </div>
-
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="alamat">Alamat</label>
+                                            <input type="text" name="alamat" id="alamat" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="jumlah">Jumlah</label>
+                                            <input type="number" name="jumlah" id="jumlah" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="pengembalian">Pengembalian</label>
+                                            <input type="date" name="pengembalian" id="pengembalian" required class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                @if($inventaris->jumlah == "0")
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Kosong, Dipinjam semua</strong>
+                                </div>
+                                @else
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Ada, tersedia {{ $inventaris->jumlah }} barang</strong>
+                                </div>
+                                @endif
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <label for="name">Nama Inventaris</label>
+                                            <input type="text" disabled name="name" id="name" required class="form-control" value="{{ $inventaris->name }}">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Jumlah</label>
+                                            <input type="number" name="" id="" required class="form-control" value="{{ $inventaris->jumlah }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tujuan">Deskripsi</label>
+                                    <textarea name="tujuan" required id="tujuan" disabled class="form-control" rows="2">{{ $inventaris->description }}</textarea>
                                 </div>
                             </div>
-                            <div class="text-right mr-3 mb-4">
-                                <button type="submit" class="btn btn-primary px-5">Pinjam</button>
+                        </div>
+                        <div class="col-md-4 pt-4">
+                            <div class="position-sticky" style="top: 100px">
+                                <div class="w-100 bg-dark" style="height: 300px"></div>
+                                <button type="submit" class="btn btn-success px-5 w-100 rounded-0">Ambil foto</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

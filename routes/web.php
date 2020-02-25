@@ -38,6 +38,10 @@ Route::get('/buku_tamu', 'TamuController@create');
 Route::post('/buku_tamu/add', 'TamuController@store');
 Route::get('/buku_tamu/{token}/foto/pegawai/{id}', 'TamuController@webcamPage');
 Route::get('/buku_tamu/{token}/pegawai/{id}', 'TamuController@show');
+Route::post('/buku_tamu/{token}/pegawai/{id}/pdf', 'TamuController@cetak');
+Route::get('/buku_tamu/{token}/pegawai/{id}/pdf', 'TamuController@cetak');
+Route::get('/buku_tamu/fix/{token}/pegawai/{id}', 'TamuController@edit');
+Route::post('/buku_tamu/fix/{token}/pegawai/{id}/updated', 'TamuController@update');
 
 // simpan_pinjam
 Route::get('/simpan_pinjam', 'InventarisController@index');
@@ -46,11 +50,15 @@ Route::get('/pengembalian', function() {
 });
 Route::get('/pinjam/barang/{id}', 'InventarisController@show');
 Route::post('/pinjam/barang/{id}/{kode}', 'InventarisController@pinjam');
+Route::get('/pinjam/barang/{id}/{kode}/foto', 'InventarisController@pinjam_foto');
+Route::post('/pinjam/{id}/{kode}/foto/clicked', 'InventarisController@webcam');
 Route::get('/pinjam/barang/{id}/transaksi/{kode}', 'InventarisController@getCode');
+Route::post('/pinjam/barang/{id}/transaksi/{kode}/update', 'InventarisController@update_alone');
 /* Searching */ Route::post('/pengembalian/search', 'TransaksiController@search');
                 Route::post('/peminjaman/search', 'InventarisController@peminjaman_search');
-/* Kembalikan */ Route::get('/kembali/barang/{id}/transaksi/{kode}', 'TransaksiController@kembali');
+/* Kembalikan */Route::get('/kembali/barang/{id}/transaksi/{kode}', 'TransaksiController@kembali');
 /* Make PDF  */ Route::get('/transaksi/{kode_tf}/pdf', 'TransaksiController@pdf');
+                Route::get('/transaksi/{kode_tf}/pdf', 'TransaksiController@pdf');
 
 // Dashboard
 // Route::get('/dashboard', 'DashboardController@index');

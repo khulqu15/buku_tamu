@@ -154,19 +154,20 @@
                                         <td>{{ $t->created_at }}</td>
                                         <td>
                                             <a class="btn btn-danger btn-sm" href="{{ url('tamu_delete/'.$t->id) }}" role="button">Hapus</a>
+                                            <button class="btn btn-primary btn-sm" onclick="window.open('{{ url('buku_tamu/'.$t->api_token.'/pegawai/'.$t->user_id.'/pdf') }}')">Cetak</button>
                                         </td>
                                     </tr>
                                 @endforeach
-                                    <tr>
-                                        <td colspan="5">
-                                            {{ $tamu->links() }}
-                                        </td>
-                                        <td colspan="3">
-                                            <div class="alert alert-info" role="alert">
-                                                <strong>Total semua tamu : {{ $tamu->total() }}</strong>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        {{ $tamu->links() }}
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="alert alert-info" role="alert">
+                                            <strong>Total semua tamu : {{ $tamu->total() }}</strong>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

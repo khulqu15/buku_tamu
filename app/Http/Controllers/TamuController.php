@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use PDF;
 
 class TamuController extends Controller
 {
@@ -36,8 +37,10 @@ class TamuController extends Controller
             return redirect('/buku_tamu')->with('error', 'Isi form terlebih dahulu');
         } else {
             $tamu = Tamu::where('api_token', $token)->first();
+            if($isToken->foto !== '' || $isToken->foto !== null) {
+                File::delete('webcam/tamu/'.$tamu->foto);
+            }
             $select_tamu = Tamu::find($tamu->id);
-
             $pegawai = User::find($id);
             $image = $request->image;
             $image = str_replace('data:image/jpeg;base64', '', $image);
@@ -49,7 +52,8 @@ class TamuController extends Controller
             $select_tamu->foto = $imageName;
             $select_tamu->save();
 
-            return redirect('/buku_tamu/'.$token.'/pegawai/'.$id)->with('success', 'Foto berhasil diterapkan');
+            return redirect('/buku_tamu/fix/'.$token.'/pegawai/'.$id)->with('success', 'Foto berhasil diterapkan');
+            // return redirect('/buku_tamu/'.$token.'/pegawai/'.$id)->with('success', 'Foto berhasil diterapkan');
         }
     }
 
@@ -138,9 +142,13 @@ class TamuController extends Controller
      * @param  \App\Tamu  $tamu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tamu $tamu)
+    public function edit($token, $id)
     {
-        //
+        $pegawais = User::all();
+        $tamu = Tamu::where('api_token', $token)->first();
+        $select_tamu = Tamu::find($tamu->id);
+        $select_pegawai = User::find($id);
+        return view('pages.peminjaman_reset', ['tamu' => $select_tamu, 'pegawai' => $select_pegawai, 'pegawais' => $pegawais]);
     }
 
     /**
@@ -150,9 +158,32 @@ class TamuController extends Controller
      * @param  \App\Tamu  $tamu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tamu $tamu)
+    public function update(Request $request, $token, $id)
     {
-        //
+        $tamu_select = Tamu::where('api_token', $token)->first();
+
+        $tamu = Tamu::find($tamu_select->id);
+        $tamu->name = $request->name;
+        $tamu->phone = $request->phone;
+        $tamu->umur = $request->umur;
+        $tamu->gender = $request->gender;
+        $tamu->alamat = $request->alamat;
+        $tamu->instansi = $request->instansi;
+        $tamu->user_id = $request->user;
+        $tamu->tujuan = $request->tujuan;
+
+        $tamu->save();
+
+        return redirect('/buku_tamu/'.$tamu->api_token.'/pegawai/'.$id)->with('success', 'Berhasil disimpan');
+    }
+
+    public function cetak($token, $id)
+    {
+        $tamu = Tamu::where('api_token', $token)->first();
+        $pegawai = User::find($id);
+
+        $pdf = PDF::loadView('invoice.print_tamu', compact('tamu', 'pegawai'))->setPaper('a7', 'potrait');
+        return $pdf->stream();
     }
 
     /**

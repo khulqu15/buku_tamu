@@ -53,23 +53,24 @@
                            <label for="jumlah">Jumlah yang dipinjam</label>
                            <input type="text" name="jumlah" required id="jumlah" disabled class="form-control" value="{{ $transaksi->jumlah }}"/>
                        </div>
-                       <div class="alert alert-success" role="alert">
-                            <div class="mb-3">
-                                <strong>Transaksi sukses, anda meminjam {{ $transaksi->jumlah }} Barang</strong>
-                            </div>
-                            <h2>Kode Transaski : <u>{{ $transaksi->kode_transaksi }}</u></h2>
-                        </div>
-
-                       <div class="text-right mb-5">
+                       {{-- <div class="text-right">
                            <a target="_blank" class="btn btn-primary px-5" href="{{ url('/transaksi/'.$transaksi->kode_transaksi.'/pdf') }}" role="button">Print</a>
                            <a class="btn btn-primary px-5" href="{{ url('/simpan_pinjam') }}" role="button">Kembali</a>
+                       </div> --}}
+                       <div class="row mb-5">
+                           <div class="col-sm-6">
+                               <button type="button" class="btn btn-success w-100" id="reset">Reset</button>
+                           </div>
+                           <div class="col-sm-6">
+                               <button type="submit" class="btn btn-primary w-100" id="submit">Submit</button>
+                           </div>
                        </div>
-
                     </form>
                     </div>
                     <div class="col-md-4 pt-4">
                         <div class="position-sticky" style="top: 100px">
                             <img src="{{ URL::asset('webcam/transaksi/'.$transaksi->foto) }}" class="rounded mb-4" width="100%" alt="">
+                            <a class="btn btn-success w-100" href="{{ url('/pinjam/barang/'.$inventaris->id.'/'.$transaksi->kode_transaksi.'/foto') }}" role="button">Ganti foto</a>
                         </div>
                     </div>
                 </div>
@@ -77,9 +78,19 @@
         </div>
     </div>
 
+    <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('js/fontawesome.min.js') }}"></script>
     <script src="{{ URL::asset('js/all.min.js') }}"></script>
+
+    <script>
+        $('#reset').click(function() {
+            $('input').removeAttr('disabled');
+        });
+        $('#submit').click(function() {
+            $('input').removeAttr('disabled');
+        });
+    </script>
 
 </body>
 </html>

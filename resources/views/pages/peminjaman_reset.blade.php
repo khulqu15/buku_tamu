@@ -29,11 +29,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ url('buku_tamu/'.$tamu->api_token.'/pegawai/'.$pegawai->id.'/pdf') }}" method="POST">
+                    <form action="{{ url('/buku_tamu/fix/'.$tamu->api_token.'/pegawai/'.$pegawai->id.'/updated') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-8 pt-5">
-                                <h3 class="mb-4">Data Tamu</h3>
+                                {{-- <div class="alert alert-info d-inline-block w-100" role="alert">
+                                    <div class="row">
+                                        <div class="col-md-3 text-center">
+                                            <img src="{{ URL::asset('img/pegawai/'.$pegawai->foto) }}" alt="" width="75%">
+                                        </div>
+                                        <div class="col-md-9 my-4">
+                                            <h3>Cara menuju ruangan {{ $pegawai->name }}</h3>
+                                            <h6>{{ $pegawai->ruangan }}, </h6>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                <h3 class="mb-4">Buku Tamu</h3>
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" disabled name="name" id="name" required class="form-control" value="{{ $tamu->name }}">
@@ -42,12 +53,20 @@
                                     <div class="row">
                                         @if($tamu->gender == "Laki-Laki")
                                         <div class="col-3">
-                                            <input type="radio" name="gender" checked value="Laki-Laki" required id="male">
+                                            <input type="radio" name="gender" disabled checked value="Laki-Laki" required id="male">
                                             <label for="male">Laki laki</label>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="radio" name="gender" disabled value="Perempuan" required id="female">
+                                            <label for="male">Perempuan</label>
                                         </div>
                                         @else
                                         <div class="col-3">
-                                            <input type="radio" checked name="gender" value="Perempuan" required id="female">
+                                            <input type="radio" name="gender" disabled value="Laki-Laki" required id="male">
+                                            <label for="male">Laki laki</label>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="radio" checked name="gender" disabled value="Perempuan" required id="female">
                                             <label for="male">Perempuan</label>
                                         </div>
                                         @endif
@@ -83,22 +102,21 @@
                                     <label for="user">Pilih Pegawai</label>
                                     <select name="user" required id="user" disabled class="form-control">
                                         <option value="{{$pegawai->id}}">{{ $pegawai->name }}</option>
-
+                                        @foreach ($pegawais as $p)
+                                            <option value="{{$p->id}}">{{ $p->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="tujuan">Tujuan bertamu</label>
                                     <textarea name="tujuan" required id="tujuan" disabled class="form-control" rows="5">{{ $tamu->tujuan }}</textarea>
                                 </div>
-                                <div class="alert alert-info d-inline-block w-100" role="alert">
-                                    <div class="row">
-                                        <div class="col-md-3 text-center">
-                                            <img src="{{ URL::asset('img/pegawai/'.$pegawai->foto) }}" alt="" width="75%">
-                                        </div>
-                                        <div class="col-md-9 my-4">
-                                            <h3>Cara menuju ruangan {{ $pegawai->name }}</h3>
-                                            <h6>{{ $pegawai->ruangan }}, </h6>
-                                        </div>
+                                <div class="row mb-5">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-success d-inline w-100" id="reset">Reset</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-primary d-inline w-100" id="submit">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +124,7 @@
                             <div class="col-md-4">
                                 <div class="position-sticky" style="top: 100px">
                                     <img src="{{ URL::asset('webcam/tamu/'.$tamu->foto) }}" width="100%" alt="">
-                                    <button type="submit" class="btn btn-success w-100 mb-3 mt-3">Cetak</button>
-                                    <a class="btn btn-primary w-100 mb-5" href="{{ url('/') }}" role="button">Selesai</a>
+                                    <a class="btn btn-success w-100 rounded-0" href="{{ url('buku_tamu/'.$tamu->api_token.'/foto/pegawai/'.$pegawai->id) }}" role="button">Ganti foto</a>
                                 </div>
                             </div>
                         </div>
@@ -119,6 +136,14 @@
 
     <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+
+    <script>
+        $('#reset').click(function() {
+            $('input').removeAttr('disabled');
+            $('select').removeAttr('disabled');
+            $('textarea').removeAttr('disabled');
+        });
+    </script>
 
 </body>
 </html>

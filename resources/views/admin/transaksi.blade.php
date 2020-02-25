@@ -128,6 +128,7 @@
                                         <td scope="col">{{ $tf->jumlah }}</td>
                                         <td>
                                             <a class="btn btn-danger btn-sm" href="{{ url('transaksi_delete/'.$tf->id) }}" role="button">Hapus</a>
+                                        <button class="btn btn-primary btn-sm" onclick="window.open('{{ url('transaksi/'.$tf->kode_transaksi.'/pdf') }}')">Cetak</button>
                                         </td>
                                     </tr>
                                 @endforeach

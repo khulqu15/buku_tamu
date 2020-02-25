@@ -16,6 +16,10 @@ class InventarisController extends Controller
     {
         $name = $request->search;
         $inventaris = DB::table('inventaris')->where('name', 'LIKE', '%'.$name.'%')->get();
+        $total = count($inventaris);
+        if($total <= 0) {
+            return redirect('/simpan_pinjam')->with('error', 'Item tidak ditemukan');
+        }
         return view('pages.result_pinjam', ['inventaris' => $inventaris]);
     }
 
@@ -38,18 +42,21 @@ class InventarisController extends Controller
         $transaksi->kode_transaksi = $kode_tf;
         $transaksi->inventaris_id = $id;
         $transaksi->jumlah = $request->jumlah;
+        $transaksi->alamat = $request->alamat;
         $transaksi->nama_peminjam = $request->nama_peminjam;
         $transaksi->phone_peminjam = $request->phone_peminjam;
         $transaksi->pengembalian = $request->pengembalian;
         $transaksi->save();
-        return redirect('/pinjam/barang/'.$id.'/transaksi/'.$kode_tf)->with('success', 'Transaksi berhasil, lihat kode transaksi untuk proses selanjutnya');
+
+        return redirect('/pinjam/barang/'.$id.'/'.$kode_tf.'/foto')->with('success', 'Transaksi berhasil, lihat kode transaksi untuk proses selanjutnya');
+        // return redirect('/pinjam/barang/'.$id.'/transaksi/'.$kode_tf)->with('success', 'Transaksi berhasil, lihat kode transaksi untuk proses selanjutnya');
     }
 
     public function getCode($id, $kode_tf)
     {
         $inventaris = Inventaris::find($id);
         $transaksi = Transaksi::where('kode_transaksi', $kode_tf)->first();
-        return view('pages.pinjam_code', ['inventaris' => $inventaris, 'transaksi' => $transaksi]);
+        return view('pages.pengembalian_reset', ['inventaris' => $inventaris, 'transaksi' => $transaksi]);
     }
 
     /**
@@ -131,6 +138,41 @@ class InventarisController extends Controller
         return view('pages.simpan_detail', ['inventaris' => $inventaris]);
     }
 
+    public function pinjam_foto(Request $request, $id, $kode)
+    {
+        $inventaris = Inventaris::find($id);
+        $transaksi = Transaksi::where('kode_transaksi', $kode)->first();
+        $transaksiId = $inventaris->id;
+        $kode_tf = $transaksi->kode_transaksi;
+        // die;
+        return view('pages.pinjam_foto', ['id' => $transaksiId, 'kode' => $kode_tf]);
+    }
+
+    public function webcam(Request $request, $id, $kode)
+    {
+
+        $transaksi = Transaksi::where('kode_transaksi', $kode)->first();
+        $select_transaksi = Transaksi::find($transaksi->id);
+
+        if($select_transaksi->foto !== '' || $select_transaksi->foto !== null) {
+            File::delete('webcam/transaksi/'.$transaksi->foto);
+        }
+
+        $image = $request->image;
+        $image = str_replace('data:image/jpeg;base64', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = time().'-'.strtoupper(Str::random(5)).'.'.'jpeg';
+
+        File::put(public_path().'/webcam/transaksi/'.$imageName, base64_decode($image));
+
+        $select_transaksi->foto = $imageName;
+        $select_transaksi->save();
+
+        return redirect('/pinjam/barang/'.$id.'/transaksi/'.$kode)->with('success', 'Foto berhasil diterapkan');
+
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -176,6 +218,25 @@ class InventarisController extends Controller
         } catch(\Throwable $th) {
             return redirect('/barang/'.$inventaris->id)->with('error', 'Barang gagal ditambah');
         }
+    }
+
+    public function update_alone(Request $request, $id, $kode)
+    {
+        $inventaris = Inventaris::find($id);
+        $select_transaksi = Transaksi::where('kode_transaksi', $kode)->first();
+        $transaksi = Transaksi::find($select_transaksi->id);
+
+        $inventaris->jumlah = $inventaris->jumlah + $transaksi->jumlah;
+        $inventaris->jumlah = $inventaris->jumlah - $request->jumlah;
+        $inventaris->save();
+
+        $transaksi->nama_peminjam = $request->nama_peminjam;
+        $transaksi->phone_peminjam = $request->phone_peminjam;
+        $transaksi->alamat = $request->alamat;
+        $transaksi->jumlah = $request->jumlah;
+        $transaksi->save();
+
+        return view('pages.pinjam_code', ['inventaris' => $inventaris, 'transaksi' => $transaksi, 'success' => 'Berhasil disimpan']);
     }
 
     /**

@@ -14,15 +14,18 @@
 
     <div class="container-fluid mx-0">
         @if (session('error'))
-            <div class="alert alert-danger position-relative w-100" style="top: 0; left: 0;">
+            <div class="alert alert-danger position-relative w-100" style="top: 0; left: 0; z-index: 100">
                 {{ session('error') }}
             </div>
         @endif
         @if (session('success'))
-            <div class="alert alert-success position-relative w-100" style="top: 0; left: 0;">
+            <div class="alert alert-success position-relative w-100" style="top: 0; left: 0; z-index: 100">
                 {{ session('success') }}
             </div>
         @endif
+
+        @include('pages.nav.navbar')
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-4">
