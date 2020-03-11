@@ -1,3 +1,13 @@
+
+@font-face {
+    font-family: montserrat;
+    src: url('../font/Montserrat-Regular.ttf');
+}
+
+* {
+    font-family: montserrat;
+}
+
 * {
     font-family: montserrat;
 }
@@ -8,6 +18,155 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden !important;
+}
+#myVideo {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: -5px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.bg-image-home {
+    background-image: url('../img/assets/img/bg.png');
+    background-size: cover;
+}
+.bg-image1-home {
+    background-image: url('../img/assets/img/bg1.png');
+    background-size: cover;
+}
+a:hover {
+    text-decoration: none;
+}
+.text-welcome-home {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.image-logo-home {
+    top: 0;
+    left: 0;
+    top: 40%;
+}
+.text-welcome-home h1 {
+    font-size: 3.5rem;
+}
+.text-welcome-home svg {
+    position: absolute;
+    right: 40px;
+    font-size: 3.5rem;
+    bottom: 30px;
+}
+.card-choose {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+.card-choose::before {
+    z-index: -200;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    border-radius: 5px;
+    content: "";
+    left: -6px;
+    top: -6px;
+    bottom: -6px;
+    right: -6px;
+}
+.login-portal {
+    bottom: 40px;
+    right: 40px;
+}
+.login-card::before {
+    z-index: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    border-radius: 5px;
+    content: "";
+    left: -7px;
+    top: -24px;
+    bottom: -24px;
+    right: -6px;
+}
+input:focus {
+    outline: 1px solid rgba(8, 173, 75, 1);
+    border: none;
+}
+.webcam-border::before {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    border-radius: 5px;
+    content: "";
+    left: -10px;
+    top: -10px;
+    bottom: -10px;
+    right: -10px;
+}
+.bgo-absolute {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.text-nav {
+    display: inline-block;
+}
+@media only screen and (max-width: 757px) {
+    .text-nav {
+        display: none;
+    }
+}
+.bg-home {
+    height: 768px;
+}
+
+.help-nav a:hover,
+.text-color {
+    color: #08AD4B;
+}
+.bg-color {
+    background-color: #08AD4B;
+}
+.bgo-color {
+    background-color: rgba(8, 173, 75, .7);
+}
+.bg-white {
+    background-color: white;
+}
+.bgo-white {
+    background-color: rgba(225, 225, 225, 0.7);
+}
+.bgo-dark {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.page-link {
+    border-radius: 100px !important;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 22px;
+    margin: 0px 2px;
+    color: #08AD4B;
+    border-color: rgba(8, 173, 75, .5);
+}
+.page-item.active .page-link {
+    background-color: rgb(14, 230, 100) !important;
+    border-color: rgb(14, 230, 100)
+}
+.page-item.disabled .page-link {
+    background-color: gainsboro;
+}
+.peminjaman-picture {
+    border: 8px solid rgb(216, 216, 216);
+}
+.message-top {
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed !important;
+    border-radius: 0 !important;
 }
 @font-face {
     font-family: montserrat;
@@ -99,4 +258,5 @@ input:focus, textarea:focus {
     outline: none !important;
     background-color: #08AD4B;
     border: 2px solid rgba(8, 173, 75, 1);
+
 }

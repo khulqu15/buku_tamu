@@ -1,26 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pilih Fitur</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+@section('content')
 
-</head>
-<body class="bg-home">
+    @include('layouts.navbars.mynav')
 
-    @include('pages.nav.navbar')
-
-    <div class="container-fluid position-relative h-100 bgo-color">
-        <div class="position-absolute go_login">
-            <a href="{{ url('/login') }}">
-                <img src="{{ URL::asset('img/assets/icon/login.png') }}" width="90px" alt="">
-             </a>
+    <div class="container-fluid bg-image-home pb-5 position-relative">
+        <div class="bgo-color position-absolute w-100 h-100 bgo-absolute"></div>
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('error') }}</strong>
         </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('success') }}</strong>
+        </div>
+    @endif
+
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-md-4 offset-md-1 py-5 my-5">
@@ -56,17 +58,24 @@
                                 <img src="{{ URL::asset('img/assets/icon/pengembalian.png') }}" width="100%" alt="">
                             </div>
                         </div>
+
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="login-portal position-absolute">
+            <a href="{{ url('/login') }}">
+                <img src="{{ URL::asset('img/assets/icon/login.png') }}" width="70px" alt="">
+            </a>
+        </div>
+
     </div>
+
 
     <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ URL::asset('js/all.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
-</body>
-</html>
+@endsection

@@ -1,98 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ambil Foto</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+@section('content')
 
-    <style>
-        #my_camera{
-            width: 640px;
-            height: 480px;
-            border: 1px solid black;
-        }
-    </style>
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('error') }}</strong>
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('success') }}</strong>
+    </div>
+@endif
 
-</head>
-<body>
-    @if (session('error'))
-        <div class="alert alert-danger position-fixed w-100" style="top: 0; left: 0; z-index: 100;">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success position-fixed w-100" style="top: 0; left: 0; z-index: 100;">
-            {{ session('success') }}
-        </div>
-    @endif
-    <div class="container text-center mt-5 pt-5">
+
+<div class="container-fluid bg-image-home position-relative">
+    <div class="bgo-dark position-absolute w-100 h-100 bgo-absolute"></div>
+    <div class="container text-center py-5">
         <div class="row">
-            <div class="col-md-12 text-center position-relative">
-                <form action="{{ url('/pinjam/'.$id.'/'.$kode.'/foto/clicked') }}" method="post" enctype="multipart/form-data">
+            <div class="col-md-12 text-center pb-5 position-relative">
+                <form action='{{ url('/pinjam/'.$id.'/'.$kode.'/foto/clicked') }}' method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="d-inline-block text-center">
-                        <div id="my_camera" class="d-inline-block ml-4"></div>
+                    <div class="d-inline-block text-center position-relative">
+                        <div class="webcam-border">
+                            <div id="my_camera" class="d-inline-block rounded position-relative overflow-hidden"></div>
+                            <div id="results" class="position-absolute text-center rounded overflow-hidden" style="z-index: 50; top: 0"></div>
+                        </div>
                     </div>
                     <input type="hidden" name="image" id="image" class="image">
-                    <button type="submit" class="btn btn-primary position-absolute px-5" id="submit_form" style="bottom: -70px; right: 0px" disabled>Lanjut</button>
-                    <div id="results" class="position-absolute w-100 text-center" style="z-index: 100; top: 0"></div>
+                    <button type="submit" class="btn btn-primary position-absolute px-5 my-5" id="submit_form" style="bottom: 0px; right: 0px" disabled>Lanjut</button>
                 </form>
-                <button class="btn btn-primary my-4" onclick="reset()">Reset</button>
-                <button class="btn btn-primary my-4" onclick="take_snapshot()">Click foto</button>
+                <button class="btn btn-light px-5 my-4" onclick="reset()">Reset</button>
+                <button class="btn btn-success px-5 my-4" onclick="take_snapshot()">Click foto</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('webcamjs/webcam.min.js') }}"></script>
+<script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ URL::asset('webcamjs/webcam.min.js') }}"></script>
 
-    <script language="JavaScript">
 
-        // Configure a few settings and attach camera
-        $(document).ready(function() {
-            Webcam.set({
-                width: 640,
-                height: 480,
-                image_format: 'jpeg',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#my_camera');
-        });
+<script language="JavaScript">
 
-        function reset() {
-            Webcam.set({
-                width: 640,
-                height: 480,
-                image_format: 'jpeg',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#my_camera');
-            $('#results').hide();
-        }
+// Configure a few settings and attach camera
+$(document).ready(function() {
+    Webcam.set({
+        width: 640,
+        height: 480,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+});
 
-        // A button for taking snaps
+function reset() {
+    Webcam.set({
+        width: 640,
+        height: 480,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+    $('#results').hide();
+}
 
-        function take_snapshot() {
-        $('#results').show();
-        $('#submit_form').removeAttr("disabled");
-         // take snapshot and get image data
-        Webcam.snap( function(data_uri) {
-         // display results in page
-            var imageCode = $('#image').val(data_uri);
-            console.log(imageCode);
-            document.getElementById('results').innerHTML =
-            '<img id="imageprev" src="'+data_uri+'"/>';
-            } );
+// A button for taking snaps
 
-            Webcam.reset();
-        }
+function take_snapshot() {
+$('#results').show();
+$('#submit_form').removeAttr("disabled");
+    // take snapshot and get image data
+Webcam.snap( function(data_uri) {
+    // display results in page
+    var imageCode = $('#image').val(data_uri);
+    console.log(imageCode);
+    document.getElementById('results').innerHTML =
+    '<img id="imageprev" src="'+data_uri+'"/>';
+    } );
 
-       </script>
+    Webcam.reset();
+}
 
-</body>
-</html>
+</script>
+@endsection

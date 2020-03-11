@@ -1,31 +1,9 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Buku Tamu</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/fontawesome.min.css') }}">
+@section('content')
 
-    <style>
-        #myVideo {
-            position: relative;
-            right: 0;
-            left: 0;
-            top: -5px;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
 
-</head>
-<body>
 
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
@@ -43,6 +21,7 @@
                 <div class="position-absolute logo align-middle d-inline-block w-100 text-center">
                     <img src="{{ URL::asset('img/assets/img/ar-rifai_logo.png') }}" class="position-relative" alt="">
                 </div>
+
             </div>
         </div>
     </div>
@@ -51,6 +30,7 @@
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('js/all.min.js') }}"></script>
     <script src="{{ URL::asset('js/fontawesome.min.js') }}"></script>
+
 
     <script>
         document.addEventListener('keypress', function() {
@@ -61,5 +41,4 @@
         });
     </script>
 
-</body>
-</html>
+@endsection
