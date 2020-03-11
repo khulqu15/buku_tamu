@@ -4,6 +4,24 @@
 
 @include('layouts.navbars.mynav')
 
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('error') }}</strong>
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('success') }}</strong>
+    </div>
+@endif
+
+
 <div class="container-fluid bg-image-home position-relative">
     <div class="bgo-white position-absolute w-100 h-100 bgo-absolute"></div>
     <form action="{{ url('/buku_tamu/fix/'.$tamu->api_token.'/pegawai/'.$pegawai->id.'/updated') }}" method="POST">

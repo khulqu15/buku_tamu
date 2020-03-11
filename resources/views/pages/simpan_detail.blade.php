@@ -1,46 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Simpan Pinjam</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+@section('content')
 
-</head>
-<body>
 
-    @if (session('error'))
-        <div class="alert alert-danger position-fixed w-100" style="top: 0; left: 0; z-index: 100;">
-            {{ session('error') }}
-        </div>
-    @endif
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('error') }}</strong>
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('success') }}</strong>
+    </div>
+@endif
 
-    @include('pages.nav.navbar')
 
-    <div class="container pt-5 mt-4">
+@include('layouts.navbars.mynav')
+
+<div class="container-fluid bg-light px-0">
+    <div class="container pt-4 mt-4">
         <div class="row">
             <form action="{{ url('/pinjam/barang/'.$inventaris->id.'/'.$inventaris->kode_barang) }}" method="post">
+                {{ csrf_field() }}
             <div class="col-md-12">
-                <h3>Peminjaman {{ $inventaris->name }}</h3>
+                <h3 class="font-weight-bold">FORM PEMINJAMAN BARANG</h3>
                 <div class="row">
-                    <div class="col-md-8">
-                            {{ csrf_field() }}
+                    <div class="col-md-8 pr-md-5">
+                        <div class="pr-md-5 pr-0 mr-md-3 mr-0">
                             <div class="col-lg-12 mt-5">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="nama_peminjam">Nama Peminjam</label>
+                                            <label for="barang">Nama Barang</label>
+                                        <input disabled type="text" name="barang" id="barang" required class="form-control" value="{{ $inventaris->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="nama_peminjam">Nama Lengkap</label>
                                             <input type="text" name="nama_peminjam" id="nama_peminjam" required class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="phone_peminjam">Nomor HP</label>
+                                            <label for="phone_peminjam">Nomor Telp</label>
                                             <input type="text" name="phone_peminjam" id="phone_peminjam" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
                                         </div>
                                     </div>
@@ -52,18 +61,24 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="jumlah">Jumlah</label>
-                                            <input type="number" name="jumlah" id="jumlah" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
+                                            <label for="instansi">Instansi</label>
+                                            <input type="text" name="instansi" id="instansi" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label for="jumlah">Jumlah</label>
+                                            <input type="number" name="jumlah" id="jumlah" required class="form-control" min="1" max="{{ $inventaris->jumlah }}">
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-md-12">
+                                        <div class="form-group">
                                             <label for="pengembalian">Pengembalian</label>
                                             <input type="date" name="pengembalian" id="pengembalian" required class="form-control">
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                @if($inventaris->jumlah == "0")
+                                {{-- @if($inventaris->jumlah == "0")
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Kosong, Dipinjam semua</strong>
                                 </div>
@@ -77,7 +92,7 @@
                                         <div class="form-group">
                                             <label for="name">Nama Inventaris</label>
                                             <input type="text" disabled name="name" id="name" required class="form-control" value="{{ $inventaris->name }}">
-                                       </div>
+                                    </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -89,13 +104,18 @@
                                 <div class="form-group">
                                     <label for="tujuan">Deskripsi</label>
                                     <textarea name="tujuan" required id="tujuan" disabled class="form-control" rows="2">{{ $inventaris->description }}</textarea>
+                                </div> --}}
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4 pt-4">
-                            <div class="position-sticky" style="top: 100px">
-                                <div class="w-100 bg-dark" style="height: 300px"></div>
-                                <button type="submit" class="btn btn-success px-5 w-100 rounded-0">Ambil foto</button>
+
+                            <h5 class="font-weight-bold">Kode Barang : {{ $inventaris->kode_barang }}</h5>
+
+                            <div class="position-sticky mt-5 text-center" style="top: 100px">
+                                <div class="w-100 bg-white rounded peminjaman-picture" style="height: 300px"></div>
+                                <button type="submit" class="btn btn-danger py-2 my-4 px-5 w-75">Ambil foto</button>
                             </div>
                         </div>
                     </div>
@@ -103,10 +123,6 @@
             </form>
         </div>
     </div>
+</div>
 
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/fontawesome.min.js') }}"></script>
-    <script src="{{ URL::asset('js/all.min.js') }}"></script>
-
-</body>
-</html>
+@endsection

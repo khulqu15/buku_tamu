@@ -134,4 +134,31 @@ input:focus {
 .bgo-dark {
     background-color: rgba(0, 0, 0, 0.5);
 }
-
+.page-link {
+    border-radius: 100px !important;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 22px;
+    margin: 0px 2px;
+    color: #08AD4B;
+    border-color: rgba(8, 173, 75, .5);
+}
+.page-item.active .page-link {
+    background-color: rgb(14, 230, 100) !important;
+    border-color: rgb(14, 230, 100)
+}
+.page-item.disabled .page-link {
+    background-color: gainsboro;
+}
+.peminjaman-picture {
+    border: 8px solid rgb(216, 216, 216);
+}
+.message-top {
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed !important;
+    border-radius: 0 !important;
+}
