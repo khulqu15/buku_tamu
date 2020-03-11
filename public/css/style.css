@@ -8,6 +8,12 @@
     font-family: montserrat;
 }
 
+* {
+    font-family: montserrat;
+}
+a:hover {
+    text-decoration: none;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -161,4 +167,96 @@ input:focus {
     right: 0;
     position: fixed !important;
     border-radius: 0 !important;
+}
+@font-face {
+    font-family: montserrat;
+    src: url('../font/Montserrat-Regular.ttf');
+}
+.text-color {
+    color: #08AD4B !important;
+}
+.nav_name {
+    display: inline-block;
+}
+@media (max-width: 700px) {
+    .nav_name {
+        display: none;
+    }
+}
+.text-color:hover {
+    color: #08AD4B !important;
+}
+.go_login {
+    bottom: 25px;
+    right: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.bg-color {
+    background-color: #08AD4B;
+}
+.bg-white {
+    background-color: white;
+}
+.bgo-white {
+    background-color: rgba(225, 225, 225, 0.6);
+}
+.bgo-color {
+    background-color: rgba(8, 173, 75, .6);
+}
+.wlcm {
+    bottom: 0;
+    background-color: rgba(8, 173, 75, .9);
+}
+.wlcm h1 {
+    font-size: 4rem;
+}
+.wlcm p {
+    font-size: 1.3rem;
+}
+.wlcm svg {
+    font-size: 4rem;
+    right: 30px;
+    bottom: 20px;
+}
+
+.logo {
+    z-index: 10;
+    top: 30%;
+    width: 30%;
+    left: 0;
+}
+.logo img {
+    top: 45px;
+}
+
+.bg-home {
+    background-image: url('../img/assets/img/ar-rifai_bg.png');
+    background-size: cover;
+    background-color:rgba(8, 173, 75) !important;
+}
+.choose_one_fitur {
+    position: relative;
+    z-index: 10;
+}
+.choose_one_fitur::before {
+    border: 7px solid #fff;
+    content: "";
+    position: absolute;
+    top: -7px;
+    bottom: -7px;
+    left: -7px;
+    right: -7px;
+    opacity: 0.5;
+    border-radius: 10px;
+}
+input, textarea {
+    transition: all .3s;
+}
+input:focus, textarea:focus {
+    outline: none !important;
+    background-color: #08AD4B;
+    border: 2px solid rgba(8, 173, 75, 1);
+
 }

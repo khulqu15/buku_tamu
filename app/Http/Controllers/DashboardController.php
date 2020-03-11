@@ -29,7 +29,7 @@ class DashboardController extends Controller
     {
         $query = $request->search;
         $data = DB::table('users')->where('name', 'LIKE', '%'.$query.'%')->paginate(5);
-        return view('admin.pegawai_result', compact('data'))->render();
+        return view('admin.pegawai_result', compact('data', 'query'))->render();
 
     }
 

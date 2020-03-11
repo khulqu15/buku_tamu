@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
     Route::get('/pegawai', 'DashboardController@pegawai');
-    Route::get('/pegawai/search', 'DashboardController@pegawai_search')->name('live_search.action');
+    Route::get('/pegawai/search', 'DashboardController@pegawai_search');
     Route::get('/pegawai_delete/{id}', 'DashboardController@pegawai_destroy');
     Route::get('/pegawai/{id}', 'DashboardController@pegawai_show');
     Route::post('/pegawai/{id}/update', 'DashboardController@pegawai_update');

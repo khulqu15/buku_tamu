@@ -78,7 +78,13 @@
                                         </div>
                                     </div> --}}
                                 </div>
+
                                 {{-- @if($inventaris->jumlah == "0")
+                              <div class="text-right">
+                                    <button type="submit" class="btn btn-primary px-5 mb-4 mt-2">Submit</button>
+                                </div>
+                                @if($inventaris->jumlah == "0")
+
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Kosong, Dipinjam semua</strong>
                                 </div>

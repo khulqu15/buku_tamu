@@ -6,66 +6,71 @@
 
     <div class="container-fluid bg-image-home pb-5 position-relative">
         <div class="bgo-color position-absolute w-100 h-100 bgo-absolute"></div>
-@if (session('error'))
-    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>{{ session('error') }}</strong>
-    </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>{{ session('success') }}</strong>
-    </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('error') }}</strong>
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{ session('success') }}</strong>
+        </div>
+    @endif
 
-        <div class="container position-relative py-5">
+        <div class="container py-5">
             <div class="row py-5">
-                <div class="col-md-4 offset-md-1 pt-5 mt-5">
-                    <a href="{{ url('/buku_tamu') }}">
-                        <div class="card-choose">
-                            <div class="pt-5 pb-5 bg-white shadow-sm rounded text-center">
-                                <img src="{{ URL::asset('img/assets/icon/book.png') }}" width="25%" alt="">
-                                <h3 class="mt-5 text-dark font-weight-bold">Buku Tamu</h3>
+                <div class="col-md-4 offset-md-1 py-5 my-5">
+                    <div class="p-3 pt-5 pb-4 shadow-sm text-center choose_one_fitur bg-white rounded">
+                        <a href="{{ url('/buku_tamu') }}">
+                        <div class="position-relative" style="z-index: 10">
+                            <img src="{{ URL::asset('img/assets/icon/book.png') }}" width="25%" alt="">
+                            <div class="text-center mt-5">
+                                <h4 class="font-weight-bold text-decoration-none text-dark">BUKU TAMU</h4>
                             </div>
                         </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-4 offset-md-2 pt-5 mt-5">
-                    <div class="card-choose py-4 position-relative rounded">
+                <div class="col-md-4 offset-md-2 pt-5 my-5">
+                    <div class="shadow-sm text-center py-4 choose_one_fitur bg-white rounded">
                         <a href="{{ url('/simpan_pinjam') }}">
-                            <div class="row mx-3 my-3 pb-4 border-bottom">
-                                <div class="col-3">
-                                    <img src="{{ URL::asset('img/assets/icon/pinjam.png') }}" width="100%" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h3 class="text-dark font-weight-bold my-3">PEMINJAMAN</h3>
-                                </div>
+                        <div class="row py-3 mx-3 my-2">
+                            <div class="col-3">
+                                <img src="{{ URL::asset('img/assets/icon/peminjaman.png') }}" width="100%" alt="">
                             </div>
+                            <div class="col-9 mt-3 text-left">
+                                <h4 class="font-weight-bold text-dark">PEMINJAMAN</h4>
+                            </div>
+                        </div>
                         </a>
                         <a href="{{ url('/pengembalian') }}">
-                            <div class="row mx-3 my-3 pt-3">
-                                <div class="col-9">
-                                    <h3 class="text-dark font-weight-bold my-3">PEMINJAMAN</h3>
-                                </div>
-                                <div class="col-3">
-                                    <img src="{{ URL::asset('img/assets/icon/kembali.png') }}" width="100%" alt="">
-                                </div>
+                        <div class="row py-3 mx-3 my-1 border-top">
+                            <div class="col-9 mt-3 text-left">
+                                <h4 class="font-weight-bold text-dark">PENGEMBALIAN</h4>
                             </div>
+                            <div class="col-3 text-center">
+                                <img src="{{ URL::asset('img/assets/icon/pengembalian.png') }}" width="100%" alt="">
+                            </div>
+                        </div>
+
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="login-portal position-absolute">
             <a href="{{ url('/login') }}">
                 <img src="{{ URL::asset('img/assets/icon/login.png') }}" width="70px" alt="">
             </a>
         </div>
+
     </div>
 
 
