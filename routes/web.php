@@ -54,8 +54,8 @@ Route::get('/pinjam/barang/{id}/{kode}/foto', 'InventarisController@pinjam_foto'
 Route::post('/pinjam/{id}/{kode}/foto/clicked', 'InventarisController@webcam');
 Route::get('/pinjam/barang/{id}/transaksi/{kode}', 'InventarisController@getCode');
 Route::post('/pinjam/barang/{id}/transaksi/{kode}/update', 'InventarisController@update_alone');
-/* Searching */ Route::post('/pengembalian/search', 'TransaksiController@search');
-                Route::post('/peminjaman/search', 'InventarisController@peminjaman_search');
+/* Searching */ Route::get('/pengembalian/search', 'TransaksiController@search');
+                Route::get('/peminjaman/search', 'InventarisController@peminjaman_search');
 /* Kembalikan */Route::get('/kembali/barang/{id}/transaksi/{kode}', 'TransaksiController@kembali');
 /* Make PDF  */ Route::get('/transaksi/{kode_tf}/pdf', 'TransaksiController@pdf');
                 Route::get('/transaksi/{kode_tf}/pdf', 'TransaksiController@pdf');

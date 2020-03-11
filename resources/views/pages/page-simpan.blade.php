@@ -41,7 +41,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="phone_peminjam">Nomor HP</label>
-                                            <input type="text" name="phone_peminjam" id="phone_peminjam" required class="form-control" min="1">
+                                            <input type="number" name="phone_peminjam" id="phone_peminjam" required class="form-control" min="1">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

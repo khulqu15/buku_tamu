@@ -4,16 +4,22 @@
 
 <div class="container-fluid px-0 mx-0 bg-image-home position-relative">
     <div class="bgo-white bgo-absolute position-absolute w-100 h-100"></div>
-    @if (session('error'))
-        <div class="alert alert-danger position-relative w-100" style="top: 0; left: 0;">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success position-relative w-100" style="top: 0; left: 0;">
-            {{ session('success') }}
-        </div>
-    @endif
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('error') }}</strong>
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('success') }}</strong>
+    </div>
+@endif
 
     @include('layouts.navbars.mynav')
 

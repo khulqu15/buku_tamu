@@ -6,7 +6,7 @@
 <div class="container-fluid mx-0 bg-image-home position-relative">
 <div class="bgo-white position-absolute w-100 h-100 bgo-absolute"></div>
 @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -14,7 +14,7 @@
     </div>
 @endif
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -31,6 +31,7 @@
                     <div class="row">
                         <div class="col-md-8 pr-md-5">
                             <div class="pr-md-5 pr-0 mr-md-3 mr-0">
+
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap</label>
                                     <input type="text" name="name" id="name" required class="form-control" placeholder="Isikan nama lengkap anda">
@@ -47,11 +48,12 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="form-group">
                                             <label for="phone">Nomor Handphone</label>
-                                            <input type="text" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
+                                            <input type="number" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -69,22 +71,21 @@
                                     <label for="instansi">Instansi ( Opsional )</label>
                                     <input type="text" name="instansi" id="instansi" class="form-control" placeholder="Isikan asal instansi anda">
                                 </div>
-                                <div class="form-group">
-                                    <label for="user">Pilih Pegawai</label>
-                                    <select name="user" required id="user" class="form-control">
-                                        <option value="">Pilih Pegawai</option>
-                                        @foreach ($pegawai as $pgw)
-                                            <option value="{{ $pgw->id }}">{{ $pgw->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <label for="user">Pilih Pegawai</label>
+                                        <select name="user" required id="user" class="form-control">
+                                            <option value="">Pilih Pegawai</option>
+                                            @foreach ($pegawai as $pgw)
+                                                <option value="{{ $pgw->id }}">{{ $pgw->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tujuan">Tujuan bertamu</label>
+                                        <textarea name="tujuan" required id="tujuan" class="form-control" rows="5" placeholder="Apa tujuan anda bertamu ?"></textarea>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tujuan">Tujuan bertamu</label>
-                                    <textarea name="tujuan" required id="tujuan" class="form-control" rows="5" placeholder="Apa tujuan anda bertamu ?"></textarea>
-                                </div>
-
                             </div>
-                        </div>
 
                         <div class="col-md-4">
                             <div class="position-sticky text-center" style="top: 100px">
