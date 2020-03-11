@@ -145,7 +145,7 @@
                                 <form action="{{ url('barang/search') }}" method="get">
                                     <div class="form-group">
                                         <div class="input-group input-group-sm mb-3">
-                                        <input type="text" name="search" value="{{ q }}" id="search" class="form-control" placeholder="Cari Barang...">
+                                        <input type="text" name="search" value="{{ $query }}" id="search" class="form-control" placeholder="Cari Barang...">
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">
                                                     <i class="fa fa-search" aria-hidden="true"></i>

@@ -198,7 +198,7 @@
                                     <div class="col-9">
                                         <div class="form-group">
                                             <div class="input-group input-group-sm mb-3">
-                                                <input type="text" name="search" id="search" class="form-control" placeholder="Cari Siswa...">
+                                                <input type="text" name="search" id="search" value="{{ $query }}" class="form-control" placeholder="Cari Siswa...">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
