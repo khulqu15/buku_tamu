@@ -1,62 +1,31 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Buku Tamu</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+@section('content')
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        #myVideo {
-            position: relative;
-            right: 0;
-            left: 0;
-            top: -5px;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-
-</head>
-<body>
-
-    <div class="container-fluid m-0 p-0">
-        <div class="row m-0 p-0">
-            <div class="col-md-12 m-0 p-0">
-                <video muted loop autoplay id="myVideo">
-                    <source src="{{ URL::asset('video/1579797922-Ninno.mp4') }}" type="video/mp4">
-                </video>
+    <div class="row">
+        <div class="col-md-8 bg-home position-relative bg-image-home">
+            <div class="text-welcome-home position-absolute w-100 px-5 bgo-color py-3 text-white">
+                <h1 class="font-weight-bold">SELAMAT DATANG</h1>
+                <h5>SISTEM INFORMASI BUKU TAMU DAN PEMINJAMAN</h5>
+                <h5 class="font-weight-bold">SMK MODERN AL - RIFA'IE</h5>
+                <i class="fas fa-angle-right"></i>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 my-4">
-                    <h1>Selamat datang</h1>
-                    <p>Sistem Informasi Buku Tamu dan Peminjaman</p>
-                </div>
+        <div class="col-md-4 bg-home bg-image1-home position-relative">
+            <div class="image-logo-home position-absolute w-100 text-center">
+                <img src="{{ URL::asset('img/assets/img/logo.png') }}" width="40%" alt="">
             </div>
         </div>
     </div>
 
-    <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-
     <script>
         document.addEventListener('keypress', function() {
-            window.open("{{ url('/fitur') }}")
+            window.location.href = "{{ url('/fitur') }}"
         });
         document.addEventListener('click', function() {
-            window.open("{{ url('/fitur') }}")
+            window.location.href = "{{ url('/fitur') }}"
         });
     </script>
 
-</body>
-</html>
+@endsection

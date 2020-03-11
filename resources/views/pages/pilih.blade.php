@@ -1,54 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pilih Fitur</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+@section('content')
 
-</head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-light">
-    <a class="navbar-brand" href="{{ url('/') }}">Ar Rifai - Sistem Informasi Buku Tamu dan Peminjaman</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a target="blank" class="btn btn-primary btn-sm mx-2" href="{{ url('/login') }}" role="button">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-light btn-sm mx-2" href="#" role="button">Bantuan</a>
-                </li>
-            </ul>
+    @include('layouts.navbars.mynav')
+
+    <div class="container-fluid bg-image-home pb-5 position-relative">
+        <div class="bgo-color position-absolute w-100 h-100 bgo-absolute"></div>
+        <div class="container position-relative py-5">
+            <div class="row py-5">
+                <div class="col-md-4 offset-md-1 pt-5 mt-5">
+                    <a href="{{ url('/buku_tamu') }}">
+                        <div class="card-choose">
+                            <div class="pt-5 pb-5 bg-white shadow-sm rounded text-center">
+                                <img src="{{ URL::asset('img/assets/icon/book.png') }}" width="25%" alt="">
+                                <h3 class="mt-5 text-dark font-weight-bold">Buku Tamu</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 offset-md-2 pt-5 mt-5">
+                    <div class="card-choose py-4 position-relative rounded">
+                        <a href="{{ url('/simpan_pinjam') }}">
+                            <div class="row mx-3 my-3 pb-4 border-bottom">
+                                <div class="col-3">
+                                    <img src="{{ URL::asset('img/assets/icon/pinjam.png') }}" width="100%" alt="">
+                                </div>
+                                <div class="col-9">
+                                    <h3 class="text-dark font-weight-bold my-3">PEMINJAMAN</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ url('/pengembalian') }}">
+                            <div class="row mx-3 my-3 pt-3">
+                                <div class="col-9">
+                                    <h3 class="text-dark font-weight-bold my-3">PEMINJAMAN</h3>
+                                </div>
+                                <div class="col-3">
+                                    <img src="{{ URL::asset('img/assets/icon/kembali.png') }}" width="100%" alt="">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-    <div class="container mt-5 pt-5">
-        <div class="row pt-5">
-            <div class="col-6 pt-5 mt-5">
-                <div class="p-5 shadow-sm text-center">
-                    <i class="fas fa-book text-primary" style="font-size: 4rem"></i>
-                    <a class="btn btn-primary w-100 mt-5" href="{{ url('/buku_tamu') }}" role="button">Buku Tamu</a>
-                </div>
-            </div>
-            <div class="col-6 pt-5 mt-5">
-                <div class="p-5 shadow-sm text-center">
-                    <i class="fas fa-hands text-success" style="font-size: 4rem"></i>
-                    <a class="btn btn-success w-100 mt-5" href="{{ url('/simpan_pinjam') }}" role="button">Peminjaman</a>
-                </div>
-            </div>
+        <div class="login-portal position-absolute">
+            <a href="{{ url('/login') }}">
+                <img src="{{ URL::asset('img/assets/icon/login.png') }}" width="70px" alt="">
+            </a>
         </div>
     </div>
+
 
     <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ URL::asset('js/all.min.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
-</body>
-</html>
+@endsection
