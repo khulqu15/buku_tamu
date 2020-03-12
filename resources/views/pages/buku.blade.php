@@ -53,7 +53,7 @@
                                     <div class="col-md-9">
                                         <div class="form-group">
                                             <label for="phone">Nomor Handphone</label>
-                                            <input type="text" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
+                                            <input type="number" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -105,13 +105,6 @@
                         </div>
                     </div>
                 </form>
-
-
-
-                            </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

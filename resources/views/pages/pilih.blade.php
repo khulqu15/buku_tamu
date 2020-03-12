@@ -4,7 +4,7 @@
 
     @include('layouts.navbars.mynav')
 
-    <div class="container-fluid bg-image-home pb-5 position-relative">
+    <div class="container-fluid bg-image-home pb-5 position-relative" style="height:calc(100vh - 82px)">
         <div class="bgo-color position-absolute w-100 h-100 bgo-absolute"></div>
     @if (session('error'))
         <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
@@ -64,13 +64,11 @@
                 </div>
             </div>
         </div>
-
         <div class="login-portal position-absolute">
             <a href="{{ url('/login') }}">
-                <img src="{{ URL::asset('img/assets/icon/login.png') }}" width="70px" alt="">
+                <img src="{{ URL::asset('img/assets/icon/login.png') }}" alt="Login">
             </a>
         </div>
-
     </div>
 
 

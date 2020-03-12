@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container-fluid px-0 bg-image-home position-relative">
+    <div class="container-fluid px-0 bg-image-home position-relative" style="height:100vh">
         <div class="bgo-color bgo-absolute position-absolute w-100 h-100"></div>
 @if (session('error'))
     <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">

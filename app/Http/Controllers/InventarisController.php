@@ -66,8 +66,9 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $inventaris = Inventaris::paginate(5);
-        return view('pages.simpan', ['inventaris' => $inventaris]);
+        $inventaris = Inventaris::all();
+        return view('pages.page-simpan', ['inventaris' => $inventaris]);
+        // return view('pages.simpan', ['inventaris' => $inventaris]);
     }
 
     public function index_dashboard()
