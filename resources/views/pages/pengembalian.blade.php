@@ -1,68 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Simpan Pinjam</title>
+@extends('layouts.frontend')
 
-    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+@section('content')
 
-</head>
-<body>
+    <div class="container-fluid px-0 bg-image-home position-relative" style="height:100vh">
+        <div class="bgo-color bgo-absolute position-absolute w-100 h-100"></div>
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('error') }}</strong>
+    </div>
+@endif
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible message-top rounded-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ session('success') }}</strong>
+    </div>
+@endif
 
-    @if (session('error'))
-        <div class="alert alert-danger position-relative w-100" style="top: 0; left: 0;">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="alert alert-success position-relative w-100" style="top: 0; left: 0;">
-            {{ session('success') }}
-        </div>
-    @endif
 
-    @include('pages.nav.navbar')
+        @include('layouts.navbars.mynav')
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mt-5">
-                <div class="my-5">
-                    <h5>Pengembalian barang</h5>
-                    <form action="{{ url('/pengembalian/search') }}" method="post">
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="col-sm-9 pt-3">
-                            <div class="form-group">
-                                <label for="search">Cari kode transaksi untuk mengembalikan barang</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend bg-light">
-                                        <div class="input-group-text bg-light" id="view"><i class="fa fa-search" aria-hidden="true"></i></div>
+        <div class="container py-5 mt-5">
+            <div class="row pb-5">
+                <div class="col-md-10 offset-md-1 mt-5 pb-5">
+                    <div class="card-choose">
+                    <div class="mt-5 p-3 bg-white position-relative">
+                        <div class="d-flex mb-3">
+                            <img src="{{ URL::asset('img/assets/img/logo.png') }}" class="mt-md-0 mt-3" width="40px" height="38px" alt="">
+                            <h4 class="font-weight-bold pt-1 ml-3">FORM PENCARIAN PENGEMBALIAN BARANG</h4>
+                        </div>
+                        <form action="{{ url('/pengembalian/search') }}" method="get">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-sm-10 pt-3">
+                                <div class="form-group">
+                                    <label for="search">Cari Kode barang yang akan dikembalikan</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend bg-light">
+                                            <div class="input-group-text bg-light" id="view"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                        </div>
+                                        <input type="text" name="search" id="search" class="form-control" placeholder="Kode transaksi (XXXXX-XXXXX)">
                                     </div>
-                                    <input type="text" name="search" id="search" class="form-control" placeholder="Kode transaksi (XXXXX-XXXXX)">
                                 </div>
                             </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-success w-100 mt-0 mt-md-5">Cari</button>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-success w-100 mt-0 mt-md-5">Cari</button>
+                        </form>
+                        <div class="col-md-12 mt-4 text-center">
+                            <p>Atau anda ingin meminjam barang ?</p>
+                            <a class="btn btn-primary w-50" href="{{ url('/simpan_pinjam') }}" role="button">Peminjaman</a>
                         </div>
                     </div>
-                    </form>
                 </div>
-            </div>
-            <div class="col-md-12 text-center">
-                <p>Atau anda ingin Mengembalikan barang ?</p>
-                <a class="btn btn-primary w-50" href="{{ url('/simpan_pinjam') }}" role="button">Peminjaman</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/fontawesome.min.js') }}"></script>
-    <script src="{{ URL::asset('js/all.min.js') }}"></script>
-
-</body>
-</html>
+@endsection

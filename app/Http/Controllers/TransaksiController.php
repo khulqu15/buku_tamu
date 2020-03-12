@@ -46,7 +46,7 @@ class TransaksiController extends Controller
         $inventaris->save();
         $transaksi->save();
 
-        return redirect('/simpan_pinjam')->with('success', 'Proses pengembalian selesai');
+        return redirect('/pengembalian')->with('success', 'Proses pengembalian selesai');
     }
 
     public function pdf($kode_tf)

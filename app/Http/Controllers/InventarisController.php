@@ -15,12 +15,12 @@ class InventarisController extends Controller
     public function peminjaman_search(Request $request)
     {
         $name = $request->search;
-        $inventaris = DB::table('inventaris')->where('name', 'LIKE', '%'.$name.'%')->get();
+        $inventaris = DB::table('inventaris')->where('name', 'LIKE', '%'.$name.'%')->paginate(4, ['*'], 'page');
         $total = count($inventaris);
         if($total <= 0) {
             return redirect('/simpan_pinjam')->with('error', 'Item tidak ditemukan');
         }
-        return view('pages.result_pinjam', ['inventaris' => $inventaris]);
+        return view('pages.result_pinjam', ['inventaris' => $inventaris, 'key' => $name]);
     }
 
     public function pinjam(Request $request ,$id, $kode)
@@ -66,8 +66,9 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $inventaris = Inventaris::paginate(5);
-        return view('pages.simpan', ['inventaris' => $inventaris]);
+        $inventaris = Inventaris::all();
+        return view('pages.page-simpan', ['inventaris' => $inventaris]);
+        // return view('pages.simpan', ['inventaris' => $inventaris]);
     }
 
     public function index_dashboard()
