@@ -311,7 +311,7 @@
         var data_inv = "{{ $inventaris }}";
         var data_inventaris = JSON.parse(data_inv.replace(/&quot;/g,'"'));
         console.log(data_inventaris)
-        // Configure a few settings and attach camera
+
         $(document).ready(function() {
             $('#form').off().submit(function (e) {
                 e.preventDefault();

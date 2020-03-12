@@ -37,35 +37,12 @@
                                     <input type="text" name="name" id="name" required class="form-control" placeholder="Isikan nama lengkap anda">
                                 </div>
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <input type="radio" name="gender" value="Laki-Laki" required id="male">
-                                            <label for="male">Laki laki</label>
-                                        </div>
-                                        <div class="col-3">
-                                            <input type="radio" name="gender" value="Perempuan" required id="female">
-                                            <label for="male">Perempuan</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <label for="phone">Nomor Handphone</label>
-                                            <input type="number" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="umur">Umur</label>
-                                            <input type="number" name="umur" id="umur" required class="form-control">
-                                        </div>
-                                    </div>
+                                    <label for="phone">Nomor Handphone</label>
+                                    <input type="number" name="phone" id="phone" required class="form-control" placeholder="Isikan nomor hp anda">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <textarea name="alamat" id="alamat" class="form-control" required rows="5" placeholder="Provinsi, Kabupaten / Kota, Kecamatan"></textarea>
+                                    <input type="text" name="alamat" id="alamat" required class="form-control" min="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="instansi">Instansi ( Opsional )</label>
@@ -81,7 +58,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tujuan">Tujuan bertamu</label>
+                                        <label for="tujuan">Kepentingan</label>
                                         <textarea name="tujuan" required id="tujuan" class="form-control" rows="5" placeholder="Apa tujuan anda bertamu ?"></textarea>
                                     </div>
                                 </div>
@@ -92,14 +69,27 @@
                                 <div class="card-choose">
                                     <div style="height: 300px" class="w-100 bg-white rounded position-relative"></div>
                                 </div>
-                                <button type="submit" class="btn btn-danger w-50 py-2 mb-5 mt-3">Ambil foto</button>
+                                <button type="submit" class="btn btn-danger w-50 py-2 mb-3 mt-3">Ambil foto</button>
                             </div>
-                            <div class="row my-5">
+                            <div class="row mb-3">
                                 <div class="col-6">
                                     <button type="button" class="btn btn-light w-100 py-2" disabled>Reset</button>
                                 </div>
                                 <div class="col-6">
                                     <button type="button" class="btn btn-success w-100 py-2" disabled>Simpan</button>
+                                </div>
+                            </div>
+                            <div class="alert alert-info d-inline-block w-100" role="alert">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Cara menuju ruangan </h4>
+                                    </div>
+                                    <div class="col-md-3 text-center mt-3">
+                                        <img src="{{ URL::asset('img/pegawai/admin.png') }}" alt="" width="100%">
+                                    </div>
+                                    <div class="col-md-9 my-3">
+                                        <h6>Arah menuju ruangan </h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
