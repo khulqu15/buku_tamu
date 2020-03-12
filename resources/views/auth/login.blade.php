@@ -38,9 +38,9 @@
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <div class="input-group">
-                                            <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Masukkan password anda">
+                                            <input type="password" name="password" id="password" class="form-control form-control-lg border-right-0" placeholder="Masukkan password anda">
                                             <div class="input-group-append bg-light">
-                                                <div class="input-group-text bg-light" id="view"><i class="fa fa-eye" id="eyePassword" onclick="togglePassword()" aria-hidden="true"></i></div>
+                                                <div class="input-group-text bg-white" id="view"><i class="fa fa-eye" id="eyePassword" onclick="togglePassword()" aria-hidden="true"></i></div>
                                             </div>
                                         </div>
                                     </div>
