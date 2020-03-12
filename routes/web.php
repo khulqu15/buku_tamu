@@ -107,5 +107,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transaksi', 'TransaksiController@index');
     Route::get('/transaksi/search', 'TransaksiController@transaksi_search');
     Route::get('/transaksi_delete/{id}', 'TransaksiController@destroy');
+
+    Route::get('/pengaturan', function() {
+        return view('admin.pengaturan');
+    });
+    Route::post('/pengaturan/video/post', 'VideoController@store');
 });
 
