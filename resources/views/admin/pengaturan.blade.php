@@ -105,7 +105,7 @@
                                         <small id="helpId"><i class="fas fa-info-circle text-info"></i> only Image and Video</small>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn btn-primary px-5 btn-sm">Simpan</button>
+                                        <button class="btn btn-success px-5 btn-sm">Simpan</button>
                                     </div>
                                 </form>
                             </div>

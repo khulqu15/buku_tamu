@@ -132,30 +132,31 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
+                                    <th scope="col">No.</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Nomor HP / WA</th>
+                                    <th scope="col">No. Telp</th>
                                     <th scope="col">Instansi</th>
                                     <th scope="col">Tujuan</th>
-                                    <th scope="col">Waktu bertamu</th>
-                                    <th scope="col">Aksi</th>
+                                    <th scope="col">Kepentingan</th>
+                                    <!-- <th scope="col">Aksi</th> -->
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i=1; ?>
                                 @foreach ($tamu as $t)
                                     <tr>
+                                        <td>{{ $i++ }}</td>
                                         <td><img src="{{ URL::asset('webcam/tamu/'.$t->foto) }}" class="rounded" alt="" width="100px"></td>
                                         <td>{{ $t->name }}</td>
-                                        <td>{{ $t->gender }}</td>
                                         <td>{{ $t->phone }}</td>
                                         <td>{{ $t->instansi }}</td>
+                                        <td>{{ $t->user_id }}</td>
                                         <td>{{ $t->tujuan }}</td>
-                                        <td>{{ $t->created_at }}</td>
-                                        <td>
+                                        <!-- <td>
                                             <a class="btn btn-danger btn-sm" href="{{ url('tamu_delete/'.$t->id) }}" role="button">Hapus</a>
                                             <button class="btn btn-primary btn-sm" onclick="window.open('{{ url('buku_tamu/'.$t->api_token.'/pegawai/'.$t->user_id.'/pdf') }}')">Cetak</button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 @endforeach
                                 <tr>

@@ -92,7 +92,7 @@
                                 <h3 class="mb-3">Daftar Barang</h3>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <button class="btn btn-sm btn-primary w-100" data-toggle="modal" data-target="#modelId">Tambah Barang</button>
+                                <button class="btn btn-sm btn-success w-100" data-toggle="modal" data-target="#modelId">Tambah Barang</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -134,7 +134,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary px-5">Save</button>
+                                                    <button type="submit" class="btn btn-success px-5">Save</button>
                                                 </div>
                                             </form>
                                         </div>

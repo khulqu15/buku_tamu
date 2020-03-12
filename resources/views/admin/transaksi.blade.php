@@ -103,23 +103,34 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
+                                    <th scope="col">No.</th>
                                     <th scope="col">Kode Transaksi</th>
                                     <th scope="col">Nama Peminjam</th>
                                     <th scope="col">Nomor hp</th>
                                     <th scope="col">Jumlah Barang</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 1; ?>
                                 @foreach ($transaksi as $tf)
                                     <tr>
+                                        <td scope="col">{{ $i++ }}</td>
                                         <td scope="col">{{ $tf->kode_transaksi }}</td>
                                         <td scope="col">{{ $tf->nama_peminjam }}</td>
                                         <td scope="col">{{ $tf->phone_peminjam }}</td>
                                         <td scope="col">{{ $tf->jumlah }}</td>
+                                        <td scope="col">
+                                            @if($tf->pengembalian!=null)
+                                                <span class="text-success">Kembali</span>
+                                            @else
+                                                <span class='text-danger'>Belum</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a class="btn btn-danger btn-sm" href="{{ url('transaksi_delete/'.$tf->id) }}" role="button">Hapus</a>
-                                        <button class="btn btn-primary btn-sm" onclick="window.open('{{ url('transaksi/'.$tf->kode_transaksi.'/pdf') }}')">Cetak</button>
+                                        <button class="btn btn-success btn-sm" onclick="window.open('{{ url('transaksi/'.$tf->kode_transaksi.'/pdf') }}')">Cetak</button>
                                         </td>
                                     </tr>
                                 @endforeach
