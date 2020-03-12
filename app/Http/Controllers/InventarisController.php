@@ -23,7 +23,74 @@ class InventarisController extends Controller
         return view('pages.result_pinjam', ['inventaris' => $inventaris, 'key' => $name]);
     }
 
-    public function pinjam(Request $request ,$id, $kode)
+    public function tes(Request $request)
+    {
+        $box = $request->all();
+        echo $request->kode_barang;
+    }
+
+    public function pinjam(Request $request)
+    {
+        $last_transaksi = Transaksi::latest()->first();
+        $param = explode("-", $last_transaksi->kode_transaksi);
+        if ($param[0] !== date('ymd')) {
+            $kode = date('ymd')."-001";
+        }else{
+            $no = $param[1]+1;
+            if (strlen($no) === 1) {
+                $kode = $param[0]."-00".$no;
+            }elseif (strlen($no) === 2) {
+                $kode = $param[0]."-0".$no;
+            }else{
+                $kode = $param[0]."-".$no;
+            }
+        }
+        $inventaris = Inventaris::where('kode_barang', $request->kode_barang)->first();
+        $total = $inventaris->jumlah - $request->jumlah;
+        $inventaris->jumlah = $total;
+        if($total == "0") {
+            $inventaris->status = "Habis";
+        }
+        $inventaris->save();
+        
+        $transaksi = new Transaksi();
+        $transaksi->kode_transaksi = $kode;
+        $transaksi->inventaris_id = $inventaris->id;
+        if ($request->image!=='' || $request->image !== null) {
+            $image = $request->image;
+            $image = str_replace('data:image/jpeg;base64', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = time().'-'.strtoupper(Str::random(5)).'.'.'jpeg';
+
+            File::put(public_path().'/webcam/transaksi/'.$imageName, base64_decode($image));
+
+            $transaksi->foto = $imageName;
+        }
+        $transaksi->jumlah = $request->jumlah;
+        $transaksi->alamat = $request->alamat;
+        $transaksi->nama_peminjam = $request->nama_peminjam;
+        $transaksi->phone_peminjam = $request->phone_peminjam;
+        $transaksi->instansi_peminjam = $request->instansi;
+        
+        if ($transaksi->save()) {
+            $arr = array(
+                'status' => true,
+                'data' => ['kode_transaksi'=>$kode],
+                'msg' => "Sukses."
+            );
+        }else{
+            $arr = array(
+                'status' => false,
+                'data' => [],
+                'msg' => "Gagal."
+            );
+        }
+        echo json_encode($arr);
+        // return redirect('/pinjam/barang/'.$id.'/'.$kode_tf.'/foto')->with('success', 'Transaksi berhasil, lihat kode transaksi untuk proses selanjutnya');
+        // return redirect('/pinjam/barang/'.$id.'/transaksi/'.$kode_tf)->with('success', 'Transaksi berhasil, lihat kode transaksi untuk proses selanjutnya');
+    }
+    
+    public function pinjam2(Request $request ,$id, $kode)
     {
         $inventaris = Inventaris::where('kode_barang', $kode)->first();
         if(!$inventaris) {
