@@ -23,12 +23,6 @@ class InventarisController extends Controller
         return view('pages.result_pinjam', ['inventaris' => $inventaris, 'key' => $name]);
     }
 
-    public function tes(Request $request)
-    {
-        $box = $request->all();
-        echo $request->kode_barang;
-    }
-
     public function pinjam(Request $request)
     {
         $last_transaksi = Transaksi::latest()->first();
@@ -134,7 +128,17 @@ class InventarisController extends Controller
     public function index()
     {
         $inventaris = Inventaris::all();
-        return view('pages.page-simpan', ['inventaris' => $inventaris]);
+        return view('pages.page-pinjam', ['inventaris' => $inventaris]);
+        // return view('pages.simpan', ['inventaris' => $inventaris]);
+    }
+    public function pengembalian()
+    {
+        $transaksi = DB::table('transaksi')
+                         ->select('inventaris.name','transaksi.id','transaksi.kode_transaksi','transaksi.nama_peminjam','transaksi.phone_peminjam','transaksi.alamat','transaksi.instansi_peminjam','transaksi.jumlah','transaksi.foto')
+                         ->join('inventaris','inventaris.id','=','transaksi.inventaris_id')
+                         ->where('transaksi.pengembalian','=',null)
+                         ->get();
+        return view('pages.page-pengembalian', ['transaksi' => $transaksi]);
         // return view('pages.simpan', ['inventaris' => $inventaris]);
     }
 

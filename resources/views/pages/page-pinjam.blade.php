@@ -345,6 +345,9 @@
                             $('#btn_right').append(btn_simpan)
                             $('#btn_snapshot').prop('hidden',true);
                             $('#btn_cari').prop('hidden',true);
+                            setTimeout(function() {
+                                $('.alert').prop('hidden',true);
+                            }, 2000);
                         }else{
                             $('.alert').addClass('alert-danger');
                             $('#txt_alert').html(data.msg);

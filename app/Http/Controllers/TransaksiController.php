@@ -22,31 +22,38 @@ class TransaksiController extends Controller
         return view('pages.kembali_barang', ['transaksi' => $result, 'inventaris' => $inventaris]);
     }
 
-    public function kembali($id, $kode)
+    public function kembali(Request $request,$id)
     {
-        $inventaris = Inventaris::find($id);
-        $transaksiId = Transaksi::where('kode_transaksi', $kode)->first();
-        $transaksi = Transaksi::find($transaksiId->id);
+        $transaksi = Transaksi::find($id);
+        $inventaris = Inventaris::find($transaksi->inventaris_id);
 
         $jumlah_tf = $transaksi->jumlah;
         $total_inven = $inventaris->jumlah + $jumlah_tf;
         $inventaris->jumlah = $total_inven;
-        $transaksi->jumlah = "0";
         if($total_inven !== "0") {
             $inventaris->status = "Tersedia";
         } else {
             $inventaris->status = "Habis";
         }
-
-        $kembali = new Kembali();
-        $kembali->nama_pengembali = $transaksi->nama_peminjam;
-        $kembali->transaksi_id = $transaksi->id;
-        $kembali->save();
+        
+        $transaksi->pengembalian = date('Y-m-d');
 
         $inventaris->save();
         $transaksi->save();
-
-        return redirect('/pengembalian')->with('success', 'Proses pengembalian selesai');
+        if ($inventaris->save() && $transaksi->save()) {
+            $arr = array(
+                'status' => true,
+                'data' => [],
+                'msg' => "Sukses."
+            );
+        }else{
+            $arr = array(
+                'status' => false,
+                'data' => [],
+                'msg' => "Gagal."
+            );
+        }
+        echo json_encode($arr);
     }
 
     public function pdf($kode_tf)
