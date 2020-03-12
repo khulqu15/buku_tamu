@@ -108,6 +108,11 @@
                         <i class="ni ni-money-coins"></i> Transaksi
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('pengaturan') }}">
+                        <i class="ni ni-settings-gear-65"></i> Pengaturan
+                    </a>
+                </li>
             </ul>
             <!-- Divider -->
 
